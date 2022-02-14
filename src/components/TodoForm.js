@@ -1,11 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { TodoContext } from "../context/TodoContext";
 
-const TodoForm = ({ addTodo }) => {
+const TodoForm = () => {
+  const { dispatch } = useContext(TodoContext);
   const [title, setTitle] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addTodo(title);
+
+    dispatch({
+      type: "ADD_TODO",
+      payload: { title },
+    });
+
     setTitle("");
   };
 
